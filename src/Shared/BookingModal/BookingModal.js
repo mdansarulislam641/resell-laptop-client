@@ -40,7 +40,8 @@ const BookingModal = ({singleProduct,setSingleProduct}) => {
                 })
                 .then(res=>res.json())
                 .then(data =>{
-                    if(data.modifiedCount){
+                    console.log(data)
+                    if(data.acknowledged){
                         toast.success(`successfully booking this ${productName}`);
                         setSingleProduct(null)
                     }

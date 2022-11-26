@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext);
     const {handleSubmit, register, reset} = useForm();
+    const navigate = useNavigate();
     const handleAddProduct = data =>{
         const image = data.productImage[0];
         const formData = new FormData();
@@ -17,7 +19,7 @@ const AddProducts = () => {
         today = mm + '/' + dd + '/' + yyyy;
 
 
-       fetch(`https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,{
+       fetch(`https://api.imgbb.com/1/upload?key=4a91eded7ff36adc25cc23954b01b729`,{
         method:"POST",
         body:(formData)
        })
@@ -53,6 +55,7 @@ const AddProducts = () => {
                 if(data.acknowledged){
                     toast.success("successfully added product")
                     reset();
+                    navigate('/dashboard/my-products')
                 }
             })
                
