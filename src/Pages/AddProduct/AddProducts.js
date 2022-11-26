@@ -17,7 +17,7 @@ const AddProducts = () => {
         today = mm + '/' + dd + '/' + yyyy;
 
 
-       fetch(`https://api.imgbb.com/1/upload?key=4a91eded7ff36adc25cc23954b01b729`,{
+       fetch(`https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,{
         method:"POST",
         body:(formData)
        })
@@ -41,7 +41,7 @@ const AddProducts = () => {
                 userImage:user?.photoURL,
                 postTime:today
             }
-            fetch('http://localhost:5000/add-product',{
+            fetch('http://localhost:5000/products',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'

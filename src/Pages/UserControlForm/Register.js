@@ -1,21 +1,65 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useTokenJwt from '../../Hook/useTokenJwt';
 import Navbar from '../../Shared/Navbar/Navbar';
 
 const Register = () => {
-    const {createNewUser} = useContext(AuthContext);
     const {handleSubmit, register} = useForm();
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [token] = useTokenJwt(registerEmail)
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || '/';
+    if(token){
+      navigate(from,{replace:true});
+     
+    }
+    const {createNewUser,updateUserProfile} = useContext(AuthContext);
     const handleRegister = data =>{
         createNewUser(data.email,data.password)
         .then(result=>{
-            console.log(result.user)
+          const name = {
+            displayName:data.name
+          }
+            updateUserProfile(name)
+            .then(result=>{
+              
+              collectUserInformation(data.email,data.accountType,data.name)
+
+            })
+        })
+        .catch(e=>{
+          console.log(e.message);
         })
         .catch(error=>{
             console.log(error)
         })
-        console.log(data)
+        
+    }
+
+    const collectUserInformation = (email, role,name) =>{
+      const info = {
+        email,
+        role,
+        name
+      }
+      fetch('http://localhost:5000/users',{
+        method:"POST",
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(info)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.acknowledged){
+          toast.success("successfully Registered");
+          setRegisterEmail(email)
+        }
+      })
     }
 
     return (
@@ -34,7 +78,7 @@ const Register = () => {
           <label className="label">
             <span className="label-text font-bold">Account Type</span>
           </label>
-          <select className='select select-bordered' {...register('account-type')}>
+          <select className='select select-bordered' {...register('accountType')}>
                 <option value="buyer">Buyer</option>
                 <option value="seller">Seller</option>
           </select>

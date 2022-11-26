@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
+  const {user,logOutUser} = useContext(AuthContext);
+  const handleSignOutUser = () =>{
+    logOutUser()
+    .then(result =>{
+      toast.success('sign out successfully');
+    })
+    .catch(e=>{
+      toast.error(e.message);
+    })
+  }
+       
     const menuList =<>
         <Link to='/home'>Home</Link>
-        <Link to="/add-product">Add Product</Link>
-        <Link to='wishlist'>WishList</Link>
-        <Link to="dashboard">Dashboard</Link>
+        
         <Link to='/blog'>Blog</Link>
-        <Link to='/register'>Register</Link>
+        {
+          user && user?.email ?  <>
+          <Link to="/dashboard">Dashboard</Link><p className='text-xl'>
+          <button onClick={handleSignOutUser} className='btn btn-ghost'>LogOut</button>
+        </p> 
+          </>: <>
         <Link to='/login'>LogIn</Link>
+        </>
+        }
+      
+       
     </>
-            
+
+   
     
     return (
         <div className="navbar bg-base-100 container ">
        <div className='flex justify-between w-full'>
-       <div className="navbar-start">
+       <div className="navbar-start w-full">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -30,14 +51,16 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
            <li className='text-xl'>{menuList}</li>
-           <li className='text-xl'>
-          <a>Get started</a>
-        </li>
+          
+       
           </ul>
+          
         </div>
-
+        <label tabIndex={0}  htmlFor="dashboard-drawer" className="btn btn-ghost drawer-button lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
        </div>
-        
+       
       </div>
     );
 };

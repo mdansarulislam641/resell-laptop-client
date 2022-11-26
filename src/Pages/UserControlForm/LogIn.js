@@ -1,23 +1,35 @@
-import React, { useCallback, useContext } from 'react';
+import React, {  useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useTokenJwt from '../../Hook/useTokenJwt';
 import Navbar from '../../Shared/Navbar/Navbar';
 
 const LogIn = () => {
-    const {logInUser} = useContext(AuthContext);
+    const [userEmail, setUserEmail] = useState('');
+    const [token] = useTokenJwt(userEmail);
     const {handleSubmit, register} = useForm();
+    
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
+    if(token){
+      navigate(from,{replace:true})
+      
+    }
+    const {logInUser} = useContext(AuthContext);
     const handleLogin = data =>{
         logInUser(data.email,data.password)
         .then(result=>{
             console.log(result)
-            toast.success(`successfully login`)
+           setUserEmail(result?.user?.email)
+           toast.success(`successfully login`)
         })
         .catch(error =>{
-            console.log(error)
+            toast.success(error.message)
         })
-        console.log(data)
+       
     }
     return (
        <>
