@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useTokenJwt from '../../Hook/useTokenJwt';
+import GoogleSignIn from '../../Shared/GoogleSingIn/GoogleSignIn';
 import Navbar from '../../Shared/Navbar/Navbar';
 
 const Register = () => {
@@ -69,12 +70,13 @@ const Register = () => {
            
   <div className="hero-content w-full">
  
-    <form onSubmit={handleSubmit(handleRegister)} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
-      <div className='text-center text-3xl font-mono font-semibold'>
+     <form  onSubmit={handleSubmit(handleRegister)}>
+     <div className='text-center text-3xl font-mono font-semibold'>
                 <h1>Register Now</h1>
             </div>
-        <div className="form-control">
+        <div className="form-control my-3">
           <label className="label">
             <span className="label-text font-bold">Account Type</span>
           </label>
@@ -86,7 +88,7 @@ const Register = () => {
         <div className="form-control">
           <input type="text" {...register('name')}  placeholder="Name" className="input input-bordered" />
         </div>
-        <div className="form-control">
+        <div className="form-control my-3">
           <input type="text" {...register('email')}  placeholder="Email" className="input input-bordered" />
         </div>
         <div className="form-control">
@@ -96,14 +98,17 @@ const Register = () => {
         <div className="form-control mt-6">
           <button type='submit' className="btn btn-primary">Register</button>
         </div>
-        <div className="form-control mt-3">
-          <button type='submit' className="btn btn-primary">Google</button>
-        </div>
+        
         <div>
             <p>Already have an account <Link to='/login' className='text-red-900 link text-xl'>Login</Link></p>
         </div>
+     </form>
+     <div className="form-control mt-3">
+         <GoogleSignIn></GoogleSignIn>
+        </div>
       </div>
-    </form>
+    </div>
+ 
    
   </div>
 </div>
