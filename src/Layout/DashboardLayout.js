@@ -20,6 +20,7 @@ const DashboardLayout = () => {
       <li className='text-xl'><Link to='/dashboard/my-products'>My Products</Link></li>
       <li><Link to='/dashboard/all-users'>All Users</Link></li>
       <li><Link to="/dashboard/add-product">Add Product</Link></li>
+      <li><Link to="/dashboard/my-orders">My Orders</Link></li>
        <li> <Link to='/dashboard/wishlist'>WishList</Link></li>
     </ul>
   

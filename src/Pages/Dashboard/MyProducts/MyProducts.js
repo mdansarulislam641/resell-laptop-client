@@ -28,7 +28,19 @@ const MyProducts = () => {
             }
         })
     }
+    const handleDeleteProduct = id =>{
+        fetch(`http://localhost:5000/products/${id}`,{
+            method:"DELETE",
 
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.deletedCount){
+                toast.success('product delete successfully')
+                refetch();
+            }
+        })
+    }
 
     if(isLoading){
         return <Loading></Loading>
@@ -65,7 +77,7 @@ const MyProducts = () => {
                         <td>{pd.condition}</td>
                         <td>{pd?.sold ? 'sold' : "Available"}</td>
                         <td><button onClick={()=>handleAdvertise(pd._id)} className={`${pd?.sold && 'btn-disabled'} btn btn-xs ${pd?.advertise && 'btn-primary btn-disabled text-black'}`}>{pd?.advertise ? ' Advertised Done' : 'Advertise'}</button></td>
-                        <td><button className='btn btn-xs'>delete</button></td>
+                        <td><button onClick={()=>handleDeleteProduct(pd._id)} className='btn btn-xs'>delete</button></td>
                       </tr>
                      )
                 }

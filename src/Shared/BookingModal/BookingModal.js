@@ -5,7 +5,12 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const BookingModal = ({singleProduct,setSingleProduct}) => {
     const {user} = useContext(AuthContext);
-    const {productName,sellPrice,phone,location,_id} = singleProduct ;
+    const {productName,sellPrice,phone,location,_id,image} = singleProduct ;
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    let yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
     const bookingInformation ={
         buyerName:user?.displayName,
         email:user?.email,
@@ -14,6 +19,9 @@ const BookingModal = ({singleProduct,setSingleProduct}) => {
         phone,
         product_id: _id,
         laptop_name:productName,
+        sellerEmail:singleProduct.userEmail,
+        bookingDate:today,
+        image:image
     }
     const handleBookLaptop = () =>{
         fetch('http://localhost:5000/bookings',{

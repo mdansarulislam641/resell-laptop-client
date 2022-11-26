@@ -19,7 +19,7 @@ const CategoryItemCard = ({product,setSingleProduct}) => {
           </div>
           </div>
          
-          <h3 className='text-xl '><span className='font-bold'>Seller Name </span>:{product.sellerName} {product?.verified && <span className=' border rounded-full bg-green-700 text-white px-2'>verified</span>}</h3>
+          <h3 className='text-xl '><span className='font-bold'>Seller Name </span>:{product.sellerName} {product?.verified ? <span className=' border rounded-full bg-green-700 text-white px-2'>verified</span>: <span className=' border rounded-full bg-green-700 text-white px-2'>unverified</span> }</h3>
           <p className='text-xl'><span className='font-bold'>Phone: </span> {product.phone}</p>
           <p className='text-xl'><span className='font-bold'>Location: </span> {product.location}</p>
           <p className='text-xl'><span className='font-bold'>Post Date: </span>{product.postTime}</p>

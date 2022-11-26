@@ -15,6 +15,7 @@ const AllUsers = () => {
         .then(res=>res.json())
         .then(sellers=>sellers)
     })
+    console.log(sellers)
 
     // get all buyers
     useEffect(()=>{
@@ -43,8 +44,9 @@ const AllUsers = () => {
     }
 
     // user verify
-    const handleVerifyUser = (id) =>{
-        fetch(`http://localhost:5000/users/${id}`,{
+    const handleVerifyUser = (email , id) =>{
+      
+        fetch(`http://localhost:5000/users/${email}`,{
             method:"PUT",
             headers:{
                 authorization:`bearer ${localStorage.getItem('resellToken')}`
@@ -52,11 +54,25 @@ const AllUsers = () => {
         })
         .then(res=>res.json())
         .then(data=>{
+
             if(data.acknowledged){
-                toast.success('successfully delete user')
+                // verify for userCollections
+                fetch(`http://localhost:5000/users-verify/${id}`,{
+                    method:"PUT",
+                    headers:{
+                        authorization:`bearer ${localStorage.getItem('resellToken')}`
+                    }
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    if(data.acknowledged){
+                        toast.success('successfully verified user')
+                    }
+                })
             }
         })
         refetch()
+        // console.log(email, id)
     }
   
     if(isLoading){
@@ -84,7 +100,7 @@ const AllUsers = () => {
                         <td>{sl?.name}</td>
                         <td>{sl.email}</td>
                         <td>{sl.role}</td>
-                        <td><button onClick={()=>handleVerifyUser(sl._id)} className='btn btn-xs'>delete</button></td>
+                        <td><button onClick={()=>handleVerifyUser(sl.email, sl._id)} className={`btn  ${sl?.verified ? 'btn-disabled  btn-xs' : 'btn-xs' }`}>{sl?.verified ? 'verified' : 'click verify'}</button></td>
                         <td><button onClick={()=>handleDeleteUser(sl._id)} className='btn btn-xs'>delete</button></td>
                       </tr>
                      )
