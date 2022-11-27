@@ -19,7 +19,7 @@ const AddProducts = () => {
         today = mm + '/' + dd + '/' + yyyy;
 
 
-       fetch(`https://api.imgbb.com/1/upload?key=4a91eded7ff36adc25cc23954b01b729`,{
+       fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API_KEY}`,{
         method:"POST",
         body:(formData)
        })
@@ -46,7 +46,8 @@ const AddProducts = () => {
             fetch('http://localhost:5000/products',{
                 method:'POST',
                 headers:{
-                    'content-type':'application/json'
+                    'content-type':'application/json',
+                    authorization:`bearer ${localStorage.getItem('resellToken')}`
                 },
                 body:JSON.stringify(productInfo)
             })

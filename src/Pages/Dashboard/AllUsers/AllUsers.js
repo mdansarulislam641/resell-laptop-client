@@ -15,7 +15,6 @@ const AllUsers = () => {
         .then(res=>res.json())
         .then(sellers=>sellers)
     })
-    console.log(sellers)
 
     // get all buyers
     useEffect(()=>{
@@ -26,7 +25,7 @@ const AllUsers = () => {
         })
         .then(res=>res.json())
         .then(buyers=>setBuyers(buyers))
-    },[])
+    },[isLoading])
     const handleDeleteUser = (id) =>{
         fetch(`http://localhost:5000/users/${id}`,{
             method:"DELETE",
@@ -38,9 +37,10 @@ const AllUsers = () => {
         .then(data=>{
             if(data.acknowledged){
                 toast.success('successfully delete user')
+                refetch()
             }
         })
-        refetch()
+   
     }
 
     // user verify
@@ -67,11 +67,12 @@ const AllUsers = () => {
                 .then(data=>{
                     if(data.acknowledged){
                         toast.success('successfully verified user')
+                        refetch()
                     }
                 })
             }
         })
-        refetch()
+      
         // console.log(email, id)
     }
   
