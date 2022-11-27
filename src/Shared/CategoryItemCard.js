@@ -5,9 +5,16 @@ import GenericModal from '../Components/GenericModal';
 
 const CategoryItemCard = ({product,setSingleProduct}) => {
   const navigate = useNavigate();
+  console.log(product)
   const handleWishList = id =>{
     const wishListInfo = {
       wishList_id : id,
+      productName:product.productName,
+      condition:product.condition,
+      sellPrice:product.sellPrice,
+      usedYear:product.usedYear,
+      image:product.image
+
 
     }
     console.log(wishListInfo, id)
