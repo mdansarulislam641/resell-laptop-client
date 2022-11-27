@@ -7,7 +7,11 @@ const WishList = () => {
     const {data:wishListItem=[], isLoading} = useQuery({
         queryKey:['wishlist'],
         queryFn:async () =>{
-            const res = await fetch('http://localhost:5000/wishlist')
+            const res = await fetch('http://localhost:5000/wishlist',{
+                headers:{
+                    authorization:`bearer ${localStorage.getItem('resellToken')}`
+                }
+            })
             const data = await res.json()
             return data ;
         }

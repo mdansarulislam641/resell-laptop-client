@@ -3,6 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProducts from "../../Pages/AddProduct/AddProducts";
+import AllBuyers from "../../Pages/Dashboard/AllUsers/AllBuyers/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/AllUsers/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import BuyerProduct from "../../Pages/Dashboard/BuyerProduct/BuyerProduct";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
@@ -69,6 +71,14 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/wishlist',
                 element:<PrivateRoute><WishList></WishList></PrivateRoute>
+            },
+            {
+                path:'/dashboard/all-sellers',
+                element:<PrivateRoute><AllSellers></AllSellers></PrivateRoute>
+            },
+            {
+                path:'/dashboard/all-buyers',
+                element:<PrivateRoute><AllBuyers></AllBuyers></PrivateRoute>
             },
         ]
     },

@@ -7,9 +7,12 @@ const AdvertiseDetails = () => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
     const [singleProduct,setSingleProduct] = useState(null);
-    console.log(singleProduct)
     useEffect(()=>{
-        fetch(`http://localhost:5000/advertise-product/${id}`)
+        fetch(`http://localhost:5000/advertise-product/${id}`,{
+            headers:{
+                authorization:`bearer ${localStorage.getItem('resellToken')}`
+            }
+        })
         .then(res=>res.json())
         .then(data =>setProduct(data))
     },[id])

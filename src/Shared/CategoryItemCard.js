@@ -31,7 +31,7 @@ const CategoryItemCard = ({product,setSingleProduct}) => {
     .then(data =>{
       if(data.acknowledged){
         toast.success('successfully added wishlist')
-        navigate(`/home`)
+        navigate(`/dashboard/wishlist`)
       }
 
     })

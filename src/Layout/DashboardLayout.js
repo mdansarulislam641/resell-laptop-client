@@ -31,7 +31,12 @@ const DashboardLayout = () => {
     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
       {
-        isAdmin?.isAdmin ==='admin' &&   <li><Link to='/dashboard/all-users'>All Users</Link></li>
+        isAdmin?.isAdmin ==='admin' &&  <>
+         <li><Link to='/dashboard/all-users'>All Users</Link></li>
+         <li><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
+         <li><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
+        
+        </>
       }
       {
         isSeller?.role === 'seller' && <>
