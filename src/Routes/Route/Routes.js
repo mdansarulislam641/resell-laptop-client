@@ -42,28 +42,28 @@ export const router = createBrowserRouter([
 
     {
         path:'/dashboard',
-        element:<DashboardLayout></DashboardLayout>,
+        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
          
             {
                 path:'/dashboard/my-products',
-                element:<MyProducts></MyProducts>
+                element:<PrivateRoute><MyProducts></MyProducts></PrivateRoute>
             },
             {
                 path:'/dashboard/all-users',
-                element:<AllUsers></AllUsers>
+                element:<PrivateRoute><AllUsers></AllUsers></PrivateRoute>
             },
             {
                 path:'/dashboard/add-product',
-                element:<AddProducts></AddProducts>
+                element:<PrivateRoute><AddProducts></AddProducts></PrivateRoute>
             },
             {
                 path:'/dashboard/my-orders',
-                element:<BuyerProduct></BuyerProduct>
+                element:<PrivateRoute><BuyerProduct></BuyerProduct></PrivateRoute>
             },
             {
                 path:'/dashboard/payment/:id',
-                element:<Payment></Payment>
+                element:<PrivateRoute><Payment></Payment></PrivateRoute>
             },
         ]
     },

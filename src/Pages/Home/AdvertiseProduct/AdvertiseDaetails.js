@@ -16,7 +16,10 @@ const AdvertiseDetails = () => {
 
 
     return (
-        <div className='container'>
+    <section className='bg-gray-100'>
+      
+            <div className='max-w-[700px] mx-auto  py-20 '>
+            <h1 className='text-4xl font-extrabold font-mono text-center pb-5'>{product.productName}</h1>
           <CategoryItemCard
           product={product}
           setSingleProduct={setSingleProduct}
@@ -29,6 +32,7 @@ const AdvertiseDetails = () => {
              ></BookingModal>
          }
         </div>
+    </section>
     );
 };
 

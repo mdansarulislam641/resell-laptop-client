@@ -21,9 +21,9 @@ const CategoryProduct = () => {
     }
     console.log(products)
     return (
-        <div>
-            <h1>this is category products</h1>
-            <div className='container'>
+        <div className='bg-gray-100 py-20'>
+            <h1 className='text-3xl pb-10  md:text-5xl font-extrabold font-mono text-center capitalize '> {data?.category_name} products</h1>
+            <div className='container grid grid-cols-1 md:grid-cols-2  gap-5 '>
                 {
                     products && products?.map(product =>
                     <CategoryItemCard

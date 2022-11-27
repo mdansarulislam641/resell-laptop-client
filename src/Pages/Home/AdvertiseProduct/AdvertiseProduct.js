@@ -29,9 +29,7 @@ const AdvertiseProduct = () => {
                    advertiseProduct ={item}
                    ></AdvertiseCard>)
                }
-               {
-                   advertiseProduct.length > 0 ?  '':''
-               }
+             
            </div>
           </section>
     }
