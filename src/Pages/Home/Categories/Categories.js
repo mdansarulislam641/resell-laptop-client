@@ -13,7 +13,7 @@ const Categories = () => {
     return <Loading></Loading>
   }
     return (
-        <section className='py-20'>
+        <section className='py-20 bg-teal-200'>
             <h1 className='text-center md:text-4xl text-2xl font-extrabold font-mono mb-20'>Resell Laptop Categories</h1>
            <div className='grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 container'>
            {

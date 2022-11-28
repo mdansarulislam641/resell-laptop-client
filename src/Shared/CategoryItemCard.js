@@ -20,7 +20,7 @@ const CategoryItemCard = ({product,setSingleProduct}) => {
 
     }
     console.log(wishListInfo, id)
-    fetch(`http://localhost:5000/wishlist`,{
+    fetch(`https://assignment-server-mdansarulislam641.vercel.app/wishlist`,{
       method:"POST",
       headers:{
         'content-type':'application/json',

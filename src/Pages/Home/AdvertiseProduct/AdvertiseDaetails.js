@@ -8,7 +8,7 @@ const AdvertiseDetails = () => {
     const [product, setProduct] = useState({});
     const [singleProduct,setSingleProduct] = useState(null);
     useEffect(()=>{
-        fetch(`http://localhost:5000/advertise-product/${id}`,{
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/advertise-product/${id}`,{
             headers:{
                 authorization:`bearer ${localStorage.getItem('resellToken')}`
             }

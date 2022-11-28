@@ -7,7 +7,7 @@ const AllUsers = () => {
     const [buyers, setBuyers] = useState([])
     const {data:sellers=[],isLoading,refetch} = useQuery({
         queryKey:['users'],
-        queryFn:()=>fetch('http://localhost:5000/users/seller',{
+        queryFn:()=>fetch('https://assignment-server-mdansarulislam641.vercel.app/users/seller',{
             headers:{
                 authorization: `bearer ${localStorage.getItem("resellToken")}`
             }
@@ -21,23 +21,20 @@ const AllUsers = () => {
 
     // get all buyers
     useEffect(()=>{
-        fetch('http://localhost:5000/users/buyer',{
+        fetch('https://assignment-server-mdansarulislam641.vercel.app/users/buyer',{
             headers:{
                 authorization:`bearer ${localStorage.getItem('resellToken')}`
             }
         })
         .then(res=>res.json())
         .then(buyers=>setBuyers(buyers))
-    },[isLoading])
+    },[])
 
-    if(isLoading){
-        return <Loading></Loading>
-    }
 
 
 
     const handleDeleteUser = (id) =>{
-        fetch(`http://localhost:5000/users/${id}`,{
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/users/${id}`,{
             method:"DELETE",
             headers:{
                 authorization:`bearer ${localStorage.getItem('resellToken')}`
@@ -57,7 +54,7 @@ const AllUsers = () => {
     // user verify
     const handleVerifyUser = (email , id) =>{
       
-        fetch(`http://localhost:5000/users/${email}`,{
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/users/${email}`,{
             method:"PUT",
             headers:{
                 authorization:`bearer ${localStorage.getItem('resellToken')}`
@@ -68,7 +65,7 @@ const AllUsers = () => {
 
             if(data.acknowledged){
                 // verify for userCollections
-                fetch(`http://localhost:5000/users-verify/${id}`,{
+                fetch(`https://assignment-server-mdansarulislam641.vercel.app/users-verify/${id}`,{
                     method:"PUT",
                     headers:{
                         authorization:`bearer ${localStorage.getItem('resellToken')}`
@@ -77,15 +74,18 @@ const AllUsers = () => {
                 .then(res=>res.json())
                 .then(data=>{
                     if(data.acknowledged){
-                        toast.success('successfully verified user')
                         refetch()
+                        toast.success('successfully verified user')
                     }
                 })
             }
         })
       
     }
-  
+    if(isLoading){
+        return <Loading></Loading>
+    }
+
   
     return (
         <div className=' mt-10 text-xl'>

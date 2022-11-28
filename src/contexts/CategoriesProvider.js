@@ -5,7 +5,7 @@ const CategoriesProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState([]);
     useEffect(()=>{
-        axios.get('http://localhost:5000/categories')
+        axios.get('https://assignment-server-mdansarulislam641.vercel.app/categories')
         .then(res=>setCategories(res.data))
         setLoading(false);
         

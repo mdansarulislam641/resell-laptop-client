@@ -48,7 +48,7 @@ const Register = () => {
         role,
         name
       }
-      fetch('http://localhost:5000/users',{
+      fetch('https://assignment-server-mdansarulislam641.vercel.app/users',{
         method:"POST",
         headers:{
           'content-type':'application/json'

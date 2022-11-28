@@ -3,7 +3,7 @@ import {  useEffect, useState } from 'react';
 const useTokenJwt = (email) => {
     const [token,setToken] = useState('');
     useEffect(()=>{
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/jwt?email=${email}`)
         .then(res=>res.json())
     .then(data=>{
         if(data.resellToken){

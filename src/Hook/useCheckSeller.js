@@ -6,7 +6,7 @@ const useCheckSeller = () => {
     const [isSeller, setIsSeller] = useState(true);
     const [SellerLoading, setSellerLoading] = useState(true)
    useEffect(()=>{
-    fetch(`http://localhost:5000/dashboard/seller/${user?.email}`)
+    fetch(`https://assignment-server-mdansarulislam641.vercel.app/dashboard/seller/${user?.email}`)
     .then(res=>res.json())
     .then(data =>{
         setIsSeller(data.isSeller)

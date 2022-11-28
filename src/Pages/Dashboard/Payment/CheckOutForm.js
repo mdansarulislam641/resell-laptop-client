@@ -13,7 +13,7 @@ const CheckOutForm = ({data}) => {
     const stripe = useStripe();
   const elements = useElements();
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://assignment-server-mdansarulislam641.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({sellPrice}),
@@ -71,14 +71,14 @@ const CheckOutForm = ({data}) => {
             return
           }
           if(paymentIntent.status === "succeeded"){
-            fetch(`http://localhost:5000/booking-product/${product_id}`,{
+            fetch(`https://assignment-server-mdansarulislam641.vercel.app/booking-product/${product_id}`,{
               method:"PUT",
 
             })
             .then(res=>res.json())
             .then(data=>{
               if(data.acknowledged){
-                fetch(`http://localhost:5000/product-get-payment/${_id}`,{
+                fetch(`https://assignment-server-mdansarulislam641.vercel.app/product-get-payment/${_id}`,{
                   method:"DELETE"
                 })
                 .then(res=>res.json())

@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
             {
                 path:'/category/:id',
                 element:<PrivateRoute><CategoryProduct></CategoryProduct></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/categories/${params.id}`)
+                loader:({params})=>fetch(`https://assignment-server-mdansarulislam641.vercel.app/categories/${params.id}`)
             },
             {
                 path:'/advertise-product/:id',
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 element:<PrivateRoute><Payment></Payment></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/dashboard/payment/${params.id}`)
+                loader:({params})=>fetch(`https://assignment-server-mdansarulislam641.vercel.app/dashboard/payment/${params.id}`)
             },
             {
                 path:'/dashboard/wishlist',

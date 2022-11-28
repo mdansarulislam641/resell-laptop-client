@@ -11,7 +11,7 @@ const CategoryProduct = () => {
     const [singleProduct, setSingleProduct] = useState(null);
     const navigation = useNavigation()
     useEffect(()=>{
-        fetch(`http://localhost:5000/products/${data?.category_name}`)
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/products/${data?.category_name}`)
         .then(res=>res.json())
         .then(data=>setProducts(data))
     },[data.category_name])

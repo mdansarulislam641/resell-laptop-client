@@ -24,7 +24,7 @@ const BookingModal = ({singleProduct,setSingleProduct}) => {
         image:image
     }
     const handleBookLaptop = () =>{
-        fetch('http://localhost:5000/bookings',{
+        fetch('https://assignment-server-mdansarulislam641.vercel.app/bookings',{
             method:"POST",
             headers:{
                 'content-type':'application/json',
@@ -35,7 +35,7 @@ const BookingModal = ({singleProduct,setSingleProduct}) => {
         .then(res=>res.json())
         .then(data=>{
             if(data.acknowledged){
-                fetch(`http://localhost:5000/products/${_id}`,{
+                fetch(`https://assignment-server-mdansarulislam641.vercel.app/products/${_id}`,{
                     method:"PUT",
                 })
                 .then(res=>res.json())

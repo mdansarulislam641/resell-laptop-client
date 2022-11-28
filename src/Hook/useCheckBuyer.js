@@ -7,7 +7,7 @@ const useCheckBuyer = () => {
     const [isBuyer, setIsBuyer] = useState(true);
     const [buyerLoading, setBuyerLoading] = useState(true)
    useEffect(()=>{
-    fetch(`http://localhost:5000/dashboard/buyer/${user?.email}`)
+    fetch(`https://assignment-server-mdansarulislam641.vercel.app/dashboard/buyer/${user?.email}`)
     .then(res=>res.json())
     .then(data =>{
         setIsBuyer(data.isBuyer)

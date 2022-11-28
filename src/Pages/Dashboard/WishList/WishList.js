@@ -9,7 +9,7 @@ const WishList = () => {
     const {data:wishListItem=[], isLoading} = useQuery({
         queryKey:['wishlist'],
         queryFn:async () =>{
-            const res = await fetch(`http://localhost:5000/wishlist/${user?.email}`,{
+            const res = await fetch(`https://assignment-server-mdansarulislam641.vercel.app/wishlist/${user?.email}`,{
                 headers:{
                     authorization:`bearer ${localStorage.getItem('resellToken')}`
                 }

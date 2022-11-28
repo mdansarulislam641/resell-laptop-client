@@ -8,7 +8,7 @@ const MyProducts = () => {
     const {user} = useContext(AuthContext);
     const {data: products=[],refetch,isLoading} = useQuery({
         queryKey:['products',user?.email],
-        queryFn:()=>fetch(`http://localhost:5000/products?email=${user?.email}`,{
+        queryFn:()=>fetch(`https://assignment-server-mdansarulislam641.vercel.app/products?email=${user?.email}`,{
             headers:{
                 authorization : `bearer ${localStorage.getItem('resellToken')}`
             }
@@ -17,7 +17,7 @@ const MyProducts = () => {
         .then(data=>data)
     })
     const handleAdvertise = id =>{
-        fetch(`http://localhost:5000/product-advertise/${id}`,{
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/product-advertise/${id}`,{
             method:"PUT"
         })
         .then(res=>res.json())
@@ -29,7 +29,7 @@ const MyProducts = () => {
         })
     }
     const handleDeleteProduct = id =>{
-        fetch(`http://localhost:5000/products/${id}`,{
+        fetch(`https://assignment-server-mdansarulislam641.vercel.app/products/${id}`,{
             method:"DELETE",
 
         })

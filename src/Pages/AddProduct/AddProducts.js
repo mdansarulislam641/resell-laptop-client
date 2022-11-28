@@ -43,7 +43,7 @@ const AddProducts = () => {
                 userImage:user?.photoURL,
                 postTime:today
             }
-            fetch('http://localhost:5000/products',{
+            fetch('https://assignment-server-mdansarulislam641.vercel.app/products',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json',
@@ -121,7 +121,7 @@ const AddProducts = () => {
                     <textarea {...register('description',{required:true})} cols="30" rows="3" className='resize-none w-full border border-gray-500 rounded px-5 py-2 text-xl' placeholder='description.....' required></textarea>
                  </div>
                  <div className="form-control mt-6">
-                   <button type='submit' className="btn btn-primary">Login</button>
+                   <button type='submit' className="btn btn-primary">Add Product</button>
                  </div>
                </div>
              </form>

@@ -10,7 +10,7 @@ const BuyerProduct = () => {
     const {data:buyerProducts=[], isLoading} = useQuery({
         queryKey:['buyer-products',user?.email],
         queryFn:async()=>{
-            const res =await fetch(`http://localhost:5000/buyer-products/${user?.email}`,{
+            const res =await fetch(`https://assignment-server-mdansarulislam641.vercel.app/buyer-products/${user?.email}`,{
                 headers:{
                     authorization:`bearer ${localStorage.getItem('resellToken')}`
                 }

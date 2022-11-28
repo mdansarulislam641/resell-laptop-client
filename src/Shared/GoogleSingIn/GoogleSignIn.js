@@ -22,7 +22,7 @@ const GoogleSignIn = () => {
                 name: result?.user?.displayName,
                 role:'buyer'
             }
-            fetch('http://localhost:5000/users',{
+            fetch('https://assignment-server-mdansarulislam641.vercel.app/users',{
                 method:"POST",
                 headers:{
                     'content-type':'application/json'

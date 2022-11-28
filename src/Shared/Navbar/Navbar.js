@@ -35,7 +35,8 @@ const Navbar = () => {
    
     
     return (
-        <div className="navbar bg-base-100 container ">
+   <section className='bg-red-300 sticky top-0 z-20 w-full'>
+         <div className="navbar  container ">
        <div className='flex justify-between w-full'>
        <div className="navbar-start w-full">
           <div className="dropdown">
@@ -46,7 +47,7 @@ const Navbar = () => {
             <li>{menuList}</li>
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl">Resell Product</Link>
+          <Link to='/home' className="btn btn-ghost normal-case text-xl font-extrabold font-mono md:text-4xl">Resell Laptop</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -62,6 +63,7 @@ const Navbar = () => {
        </div>
        
       </div>
+   </section>
     );
 };
 
