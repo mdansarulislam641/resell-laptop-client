@@ -39,6 +39,7 @@ const BuyerProduct = () => {
               <th>Title</th>
               <th>Buy Price</th>
               <th>Booking Date</th>
+              <th>IsPaid</th>
               <th>Action</th>
             </tr>
           </thead>

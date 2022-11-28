@@ -1,11 +1,13 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { CardElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
 const CheckOutForm = ({data}) => {
   console.log(data)
-  const {sellerEmail, sellPrice} = data ;
+  const {sellerEmail, sellPrice, _id} = data ;
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState("");
+    const [success, setSuccess] = useState('')
+    const [transitionId, setTransitionId] = useState('')
     const stripe = useStripe();
   const elements = useElements();
   useEffect(() => {
@@ -45,18 +47,44 @@ const CheckOutForm = ({data}) => {
             setCardError('')
           }
 
-          stripe.confirmCardPayment(
-            clientSecret, {
-            payment_method: {
-              card: card,
-              billing_details: {
-                email : data.sellerEmail,
+          const {paymentIntent, error:clientError} = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+              payment_method: {
+                card: card,
+                billing_details: {
+                  email:  sellerEmail 
+                  ,
+                },
               },
             },
-          })
-          .then(function(result) {
-            // Handle result.error or result.paymentIntent
-          });
+          );
+          if(clientError){
+            setCardError(clientError.message)
+            return
+          }
+          if(paymentIntent.status === "succeeded"){
+            fetch(`http://localhost:5000/booking-product/${_id}`,{
+              method:"PUT",
+
+            })
+            .then(res=>res.json())
+            .then(data=>{
+              if(data.acknowledged){
+                fetch(`http://localhost:5000/product-get-payment/${_id}`,{
+                  method:"DELETE"
+                })
+                .then(res=>res.json())
+                .then(data =>{
+                  console.log(data)
+                  setSuccess('Congratulation Payment successful');
+                  setTransitionId(paymentIntent.id)
+                  console.log("payment successfully",paymentIntent)
+                })
+              }
+            })
+        
+          }
     }
 
     return (
@@ -83,6 +111,13 @@ const CheckOutForm = ({data}) => {
       </button>
     </form>
     <p className='text-red-700'>{cardError}</p>
+    {
+      success && <div className='text-green-600'>
+        <p>{success}</p>
+        <p>Your Transition id: {transitionId}</p>
+
+      </div>
+    }
         
         </>
     );

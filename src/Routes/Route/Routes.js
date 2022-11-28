@@ -3,13 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProducts from "../../Pages/AddProduct/AddProducts";
-import AllBuyers from "../../Pages/Dashboard/AllUsers/AllBuyers/AllBuyers";
-import AllSellers from "../../Pages/Dashboard/AllUsers/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import BuyerProduct from "../../Pages/Dashboard/BuyerProduct/BuyerProduct";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import WishList from "../../Pages/Dashboard/WishList/WishList";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import AdvertiseDetails from "../../Pages/Home/AdvertiseProduct/AdvertiseDaetails";
 import CategoryProduct from "../../Pages/Home/Categories/CategoryProduct";
 import Home from "../../Pages/Home/Home/Home";
@@ -24,6 +23,7 @@ export const router = createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -49,6 +49,7 @@ export const router = createBrowserRouter([
     {
         path:'/dashboard',
         element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
          
             {
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/all-users',
-                element:<PrivateRoute><AllUsers></AllUsers></PrivateRoute>
+                element:<AdminRoutes><AllUsers></AllUsers></AdminRoutes>
             },
             {
                 path:'/dashboard/add-product',
@@ -76,14 +77,7 @@ export const router = createBrowserRouter([
                 path:'/dashboard/wishlist',
                 element:<BuyerRoute><WishList></WishList></BuyerRoute>
             },
-            {
-                path:'/dashboard/all-sellers',
-                element:<AdminRoutes><AllSellers></AllSellers></AdminRoutes>
-            },
-            {
-                path:'/dashboard/all-buyers',
-                element:<AdminRoutes><AllBuyers></AllBuyers></AdminRoutes>
-            },
+         
         ]
     },
 

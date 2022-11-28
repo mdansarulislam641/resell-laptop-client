@@ -16,6 +16,9 @@ const AllUsers = () => {
         .then(sellers=>sellers)
     })
 
+
+  
+
     // get all buyers
     useEffect(()=>{
         fetch('http://localhost:5000/users/buyer',{
@@ -26,6 +29,13 @@ const AllUsers = () => {
         .then(res=>res.json())
         .then(buyers=>setBuyers(buyers))
     },[isLoading])
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
+
+
+
     const handleDeleteUser = (id) =>{
         fetch(`http://localhost:5000/users/${id}`,{
             method:"DELETE",
@@ -36,8 +46,9 @@ const AllUsers = () => {
         .then(res=>res.json())
         .then(data=>{
             if(data.acknowledged){
+                refetch() 
                 toast.success('successfully delete user')
-                refetch()
+            
             }
         })
    
@@ -73,12 +84,9 @@ const AllUsers = () => {
             }
         })
       
-        // console.log(email, id)
     }
   
-    if(isLoading){
-        return <Loading></Loading>
-    }
+  
     return (
         <div className=' mt-10 text-xl'>
             <div className='my-10'>

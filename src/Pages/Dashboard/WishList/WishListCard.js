@@ -13,6 +13,10 @@ const WishListCard = ({wishlist}) => {
     <p className='text-xl'>used year : {usedYear}</p>
     <p className='text-xl'>Condition : {condition}</p>
     <div className="card-actions justify-end">
+      <Link to={`/dashboard/payment/${wishList_id}`}>
+      <button className='btn btn-primary'>pay</button>
+      </Link>
+     
     </div>
   </div>
 </div>
