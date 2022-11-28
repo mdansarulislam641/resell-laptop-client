@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../../../Components/Loading';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyOrdersCard = ({myOrder,idx,handlePay}) => {
     console.log(myOrder)
-    const {image,laptop_name,sellPrice,bookingDate,product_id, payBill} = myOrder ;
+    const {loading} = useContext(AuthContext)
+    if(loading){
+        return <Loading></Loading>
+    }
+    const {image,laptop_name,sellPrice,bookingDate,product_id,_id, payBill} = myOrder ;
+    console.log(myOrder)
     return (
         
           
@@ -15,9 +22,9 @@ const MyOrdersCard = ({myOrder,idx,handlePay}) => {
                               <td>{bookingDate}</td>
                               <td className='text-red-600'>{payBill ? "PAID" : "NOT PAID"}</td>
                              
-                              <td><button className={`btn btn-sm ${payBill ? 'btn-disabled' : 'btn-sm' }`}> <Link to={`/dashboard/payment/${product_id}`}>{payBill ? "PAID" : "PAY"}</Link></button></td>
+                              <td><button className={`btn btn-sm ${payBill ? 'btn-disabled' : 'btn-sm' }`}> <Link to={`/dashboard/payment/${_id}`}>{payBill ? "PAID" : "PAY"}</Link></button></td>
                             
-                              {/* <td><button onClick={()=>handlePay()} className={`${&& 'btn-disabled'} btn btn-xs ${advertise && 'btn-primary btn-disabled text-black'}`}>{pd?.advertise ? ' Advertised Done' : 'Advertise'}</button></td> */}
+                              
                               
                             </tr>
                          

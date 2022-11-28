@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import GenericModal from '../Components/GenericModal';
+import { AuthContext } from '../contexts/AuthProvider';
 
 const CategoryItemCard = ({product,setSingleProduct}) => {
+  const {user} = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(product)
   const handleWishList = id =>{
     const wishListInfo = {
       wishList_id : id,
@@ -13,7 +14,8 @@ const CategoryItemCard = ({product,setSingleProduct}) => {
       condition:product.condition,
       sellPrice:product.sellPrice,
       usedYear:product.usedYear,
-      image:product.image
+      image:product.image,
+      email:user?.email
 
 
     }

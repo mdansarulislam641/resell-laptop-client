@@ -1,9 +1,11 @@
 import { CardElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import Loading from '../../../Components/Loading';
 
 const CheckOutForm = ({data}) => {
   console.log(data)
-  const {sellerEmail, sellPrice, _id} = data ;
+  const {sellerEmail, sellPrice, _id, product_id} = data ;
+  const [refresh, setRefresh] = useState(true)
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState("");
     const [success, setSuccess] = useState('')
@@ -18,8 +20,13 @@ const CheckOutForm = ({data}) => {
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, [sellPrice]);
+      setRefresh(false)
+  }, [sellPrice, refresh]);
 
+
+   if (refresh){
+    return <Loading></Loading>
+   }
     const handleSubmit = async (event) =>{
         event.preventDefault();
 
@@ -64,7 +71,7 @@ const CheckOutForm = ({data}) => {
             return
           }
           if(paymentIntent.status === "succeeded"){
-            fetch(`http://localhost:5000/booking-product/${_id}`,{
+            fetch(`http://localhost:5000/booking-product/${product_id}`,{
               method:"PUT",
 
             })
@@ -77,6 +84,7 @@ const CheckOutForm = ({data}) => {
                 .then(res=>res.json())
                 .then(data =>{
                   console.log(data)
+                  setRefresh(true)
                   setSuccess('Congratulation Payment successful');
                   setTransitionId(paymentIntent.id)
                   console.log("payment successfully",paymentIntent)

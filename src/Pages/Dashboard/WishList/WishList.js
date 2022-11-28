@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Loading from '../../../Components/Loading';
+import { AuthContext } from '../../../contexts/AuthProvider';
 import WishListCard from './WishListCard';
 
 const WishList = () => {
+    const {user} = useContext(AuthContext);
     const {data:wishListItem=[], isLoading} = useQuery({
         queryKey:['wishlist'],
         queryFn:async () =>{
-            const res = await fetch('http://localhost:5000/wishlist',{
+            const res = await fetch(`http://localhost:5000/wishlist/${user?.email}`,{
                 headers:{
                     authorization:`bearer ${localStorage.getItem('resellToken')}`
                 }

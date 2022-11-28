@@ -33,10 +33,11 @@ const Register = () => {
             })
         })
         .catch(e=>{
-          console.log(e.message);
+          console.log(e.message)
+          toast.error(e.message);
         })
         .catch(error=>{
-            console.log(error)
+          toast.error(error.message);
         })
         
     }
@@ -60,6 +61,9 @@ const Register = () => {
           toast.success("successfully Registered");
           setRegisterEmail(email)
         }
+      })
+      .catch(e=>{
+        toast.error(e.message)
       })
     }
 
