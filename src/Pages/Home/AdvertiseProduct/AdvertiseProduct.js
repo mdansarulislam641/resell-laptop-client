@@ -20,7 +20,7 @@ const AdvertiseProduct = () => {
     <>
     
     { advertiseProduct.length > 0 &&
-           <section className='py-20 bg-teal-400'>
+           <section className='py-20 bg-[#cbbdcb22]'>
            <h2 className='text-2xl md:text-4xl font-extrabold font-mono text-center mb-20'>Advertise Products</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  container'>
                {

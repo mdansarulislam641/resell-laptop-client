@@ -35,7 +35,7 @@ const Navbar = () => {
    
     
     return (
-   <section className='bg-red-300 sticky top-0 z-20 w-full'>
+   <section className='bg-[#0b78e4] text-white sticky top-0 z-20 w-full'>
          <div className="navbar  container ">
        <div className='flex justify-between w-full'>
        <div className="navbar-start w-full">
